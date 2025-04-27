@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praktikum 2</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1 id="judul">Judul Awal</h1>
+    <p class="paragraf">Ini adalah paragraf.</p>
+    <button id="tombol">Klik Saya</button>
+
+    <div id="kotak" style="width: 100px; height: 100px; background-color: red;"></div>
+    <button id="toggleButton">Toggle Panel</button>
+    <div id="panel" style="display: none; background-color: lightgray; padding: 10px;">Panel Konten</div>
+
+    <button id="fadeButton">Fade Box</button>
+    <div id="box" style="width: 100px; height: 100px; background-color: green;"></div>
+
+    <script>
+        // Mengubah teks judul dan warna paragraf menggunakan jQuery
+        $(document).ready(function() {
+            $("#judul").text("Belajar jQuery");
+            $(".paragraf").css("color", "blue");
+
+            // Menampilkan alert saat tombol diklik
+            $("#tombol").click(function() {
+                alert("Tombol diklik!");
+            });
+
+            // Efek fade out dan fade in pada elemen kotak
+            $("#kotak").fadeOut();
+            $("#kotak").fadeIn();
+
+            // Toggle panel dengan efek slide
+            $("#toggleButton").click(function() {
+                $("#panel").slideToggle();
+            });
+
+            // Toggle box dengan efek fade
+            $("#fadeButton").click(function() {
+                $("#box").fadeToggle();
+            });
+
+            // Mengambil data dari API menggunakan jQuery
+            $.get("https://jsonplaceholder.typicode.com/posts", function(data) {
+                console.log("Data dari API (jQuery):", data);
+            });
+        });
+
+        // Mengambil data dari API menggunakan Fetch API
+        async function getData() {
+            try {
+                let response = await fetch("https://jsonplaceholder.typicode.com/posts");
+                let data = await response.json();
+                console.log("Data dari API (Fetch):", data);
+            } catch (error) {
+                console.error("Error saat mengambil data:", error);
+            }
+        }
+        getData();
+
+        // Mengirim data ke API menggunakan Fetch API
+        async function kirimData() {
+            try {
+                let response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        title: "Belajar JavaScript",
+                        body: "Ini contoh pengiriman data",
+                        userId: 1
+                    })
+                });
+                let data = await response.json();
+                console.log("Data yang dikirim:", data);
+            } catch (error) {
+                console.error("Error saat mengirim data:", error);
+            }
+        }
+        kirimData();
+    </script>
+</body>
+</html>
