@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Umur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+<form id="ageForm">
+    <h2>Cek Status Umur</h2>
+    <input type="text" id="nama" placeholder="Masukkan Nama" required>
+    <input type="number" id="umur" placeholder="Masukkan Umur" required>
+    <button type="submit">Cek</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+    document.getElementById('ageForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Mencegah reload halaman
+
+        const nama = document.getElementById('nama').value;
+        const umur = parseInt(document.getElementById('umur').value);
+        let message = "";
+
+        if (isNaN(umur)) {
+            message = "Umur harus berupa angka.";
+        } else if (umur >= 18) {
+            message = `${nama}, Anda Dewasa.`;
+        } else {
+            message = `${nama}, Anda Belum Dewasa.`;
+        }
+
+        document.getElementById('result').textContent = message;
+    });
+</script>
+
+</body>
+</html>
